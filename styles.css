@@ -1,28 +1,43 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 3.6rem 7.2rem;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: arial;
+    transition: 0.3s;
 }
 
-body {
-    margin: 60px 120px;
+a {
+    text-decoration: none;
+}
+
+button {
+    border: none;
 }
 
 .header {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.logo {
-    margin-right: 101px;
-}
-
 nav {
     display: flex;
-    gap: 25px;
-    font-size: 17px;
+    gap: 1.5rem;
+    font-size: 1.1rem;
+    margin-left: 6.4rem;
 }
 
 .nav-link {
@@ -32,25 +47,46 @@ nav {
 
 .buttons {
     display: flex;
-    gap: 15px;
+    gap: 1rem;
 }
 
 .btn1 {
     color: #2559D2;
     border: #2559D2 solid 2px;
     background-color: transparent;
-    padding: 10px 18px;
+    padding: 0.6rem 1.1rem;
     font-weight: bold;
-    border-radius: 7px;
+    border-radius: 0.5rem;
     cursor: pointer;
 }
 
 .btn2 {
     color: white;
-    border: white solid 2px;
+    border: #2559D2 solid 2px;
     background-color: #2559D2;
-    padding: 10px 18px;
+    padding: 0.6px 1.1rem;
     font-weight: bold;
-    border-radius: 7px;
+    border-radius: 0.5rem;
     cursor: pointer;
+}
+
+.main {
+    display: flex;
+    justify-content: space-between;
+}
+
+.main-text {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 8rem;
+}
+
+.main-title {
+    font-size: 3.5rem;
+    text-align: left;
+}
+
+.main-title-span {
+    color: #2559D2;
 }
