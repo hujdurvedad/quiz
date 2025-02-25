@@ -9,20 +9,25 @@
 <body>
     <img src="./sources/images/register-bg.jpg" alt="background" class="main-img">
     <div class="main-content">
-        <img src="./sources/icons/logo.png" alt="logo" class="logo">
+        <a href="./index.html" class="logo">
+            <img src="./sources/icons/logo.png" alt="logo" class="logo-icon">
+        </a>
         <h1 class="register-title">Registrujte se na Quiz BiH</h1>
         <p class="register-subtitle">Popunite informacije za registraciju</p>
         <div class="inputs">
-            <input type="text" class="input" placeholder="E-mail adresa">
-            <input type="text" class="input" placeholder="Korisničko ime">
-            <input type="text" class="input" placeholder="Lozinka">
-            <input type="text" class="input" placeholder="Ponovi lozinku">
+            <input type="text" class="input" placeholder="E-mail adresa" id="input1">
+            <input type="text" class="input" placeholder="Lozinka" id="input2">
+            <input type="text" class="input" placeholder="Ime" id="input3">
+            <input type="text" class="input" placeholder="Prezime" id="input4">
+            <input type="text" class="input" placeholder="Korisničko ime" id="input5">
         </div>
         <button class="register-btn">Registruj se</button>
         <div class="inputs-text">
             <p>Već imate račun ?</p>
-            <p class="second">Prijavi se.</p>
+            <a href="./login.html" class="second" target="_blank">Prijavi se</a>
         </div>
     </div>
+
+    <script src="register.js"></script>
 </body>
 </html>

@@ -9,7 +9,9 @@
 <body>
     <img src="./sources/images/login-bg.png" alt="background" class="main-img">
     <div class="main-content">
-        <img src="./sources/icons/logo.png" alt="logo" class="logo">
+        <a href="./index.html" class="logo">
+            <img src="./sources/icons/logo.png" alt="logo" class="logo-icon">
+        </a>
         <h1 class="login-title">Prijavite se na vaš račun</h1>
         <p class="login-subtitle">Unesite informacije za prijavu</p>
         <button class="google">
@@ -18,18 +20,20 @@
         </button>
         <p class="little">ili</p>
         <div class="inputs">
-            <input type="text" class="input" placeholder="E-mail adresa">
-            <input type="text" class="input" placeholder="Lozinka">
+            <input type="text" class="input" placeholder="E-mail adresa" id="input1">
+            <input type="text" class="input" placeholder="Lozinka" id="input2">
         </div>
         <div class="inputs-text">
             <p>Zaboravili ste lozinku ?</p>
-            <p class="second">Restartuj lozinku.</p>
+            <a href="" class="second">Restartuj lozinku</a>
         </div>
         <button class="login-btn">Prijavi se</button>
         <div class="inputs-text2">
             <p>Nemate račun ?</p>
-            <p class="second">Registruj se.</p>
+            <a href="./register.html" class="second" target="_blank">Registruj se</a>
         </div>
     </div>
+
+    <script src="login.js"></script>
 </body>
 </html>
