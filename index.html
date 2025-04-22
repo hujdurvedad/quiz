@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz BiH</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <header class="header">
         <a href="./index.html">
@@ -18,19 +20,13 @@
             <a href="" class="nav-link">Ljestvica</a>
         </nav>
 
-        <div class="buttons">
-            <a href="./login.html">
-                <button class="btn1">Prijavi se</button>
-            </a>
-            <a href="./register.html">
-                <button class="btn2">Registruj se</button>
-            </a>
-        </div>
+        <div class="buttons" id="authButtons"></div>
     </header>
 
     <div class="main" id="main">
         <div class="main-text">
-            <h1 class="main-title">Pokažite svoje <br>znanje o <span class="main-title-span">Bosni i Hercegovini</span></h1>
+            <h1 class="main-title">Pokažite svoje <br>znanje o <span class="main-title-span">Bosni i Hercegovini</span>
+            </h1>
             <p class="main-subtitle">Testirajte svoje znanje o historiji, kulturi i znamenitostima <br>
                 naše predivne domovine! Koliko dobro poznajete Bosnu i <br>
                 Hercegovinu?</p>
@@ -39,7 +35,31 @@
                 <p class="main-mini-text">200+ odigranih kvizova</p>
             </div>
         </div>
-            <img src="./sources/images/home-bg.png" alt="background" class="main-img-bc">
+        <img src="./sources/images/home-bg.png" alt="background" class="main-img-bc">
     </div>
+
+    <div class="uputstva">
+        <div class="title">
+            <div class="title-div">
+                <img src="./sources/icons/wand.svg" alt="wand" class="title-icon">
+                <div class="title-text">Kako funkcioniše kviz?</div>
+            </div>
+            <button class="title-btn">Započni kviz</button>
+        </div>
+        <p class="subtitle">U našem kvizu, jednostavno je izazvati sebe i druge! Odaberite kviz, odgovorite na pitanja u
+            zadanom vremenu i osvojite što više tačnih odgovora. Na kraju, možete provjeriti svoj rezultat i uporediti
+            se sa najboljima na leaderboardu. Brzo, zabavno i edukativno!</p>
+
+        <div class="uputstva-container">
+            <div class="uputstvo uputstvo1">
+                
+            </div>
+            <div class="uputstvo uputstvo2"></div>
+            <div class="uputstvo uputstvo3"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
+
 </html>
