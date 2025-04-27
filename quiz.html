@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz BiH</title>
+    <link rel="stylesheet" href="quiz.css">
+    <link href="https://fonts.cdnfonts.com/css/steradian-trial" rel="stylesheet" />
+</head>
+
+<body>
+    <a href="./index.html">
+        <img src="./sources/icons/logo.png" alt="logo" class="logo">
+    </a>
+
+    <div class="nav">
+        <div class="nav-div nav-div1">
+            <img src="./sources/icons/trophy.svg" alt="icon" class="nav-div-icon">
+            Bodovi: <span id="score">0</span>
+        </div>
+        <div class="nav-div nav-div2">
+            <img src="./sources/icons/medal.svg" alt="icon" class="nav-div-icon">
+            Najbolji rezultat: <span id="best-score">200</span>
+        </div>
+        <div class="nav-div nav-div3">
+            <img src="./sources/icons/star.svg" alt="icon" class="nav-div-icon">
+            Streak: <span id="streak">3</span>
+        </div>
+        <div class="nav-div nav-div4">
+            <img src="./sources/icons/clock.svg" alt="icon" class="nav-div-icon">
+            <span id="timer">30s</span>
+        </div>
+    </div>
+
+    <div class="questions">
+        <div class="questions-header">
+            <div class="questions-header-div"></div>
+            <p class="questions-header-text" id="question-counter">Pitanje 1 od 20</p>
+            <button class="questions-header-btn" id="finish-btn">Završi kviz</button>
+        </div>
+
+        <div class="questions-container">
+            <p class="question" id="question"></p>
+
+            <div class="timeline">
+                <div class="line"></div>
+            </div>
+
+            <div class="answers" id="answer-text"></div>
+        </div>
+    </div>
+    
+    <script src="quiz.js"></script>
+</body>
+
+</html>

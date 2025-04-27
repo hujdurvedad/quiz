@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz BiH</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.cdnfonts.com/css/steradian-trial" rel="stylesheet" />
 </head>
 
 <body>
@@ -16,7 +17,7 @@
 
         <nav>
             <a href="#main" class="nav-link">Početna</a>
-            <a href="" class="nav-link">Uputstva</a>
+            <a href="#uputstva" class="nav-link">Uputstva</a>
             <a href="" class="nav-link">Ljestvica</a>
         </nav>
 
@@ -27,24 +28,36 @@
         <div class="main-text">
             <h1 class="main-title">Pokažite svoje <br>znanje o <span class="main-title-span">Bosni i Hercegovini</span>
             </h1>
-            <p class="main-subtitle">Testirajte svoje znanje o historiji, kulturi i znamenitostima <br>
-                naše predivne domovine! Koliko dobro poznajete Bosnu i <br>
-                Hercegovinu?</p>
+            <p class="main-subtitle">Testirajte svoje znanje o historiji, kulturi i znamenitostima naše predivne
+                domovine!</p>
             <div class="main-btn-div">
-                <button class="main-btn">Započni kviz</button>
+                <button class="main-btn" onclick="startQuiz()">Započni kviz</button>
                 <p class="main-mini-text">200+ odigranih kvizova</p>
             </div>
         </div>
         <img src="./sources/images/home-bg.png" alt="background" class="main-img-bc">
     </div>
 
-    <div class="uputstva">
+    <div class="quiz-start" id="quizStart">
+        <img src="./sources/images/blue-bg.png" alt="background" class="quiz-start-bg">
+        <h1 class="quiz-start-title">Spremite se za Quiz BiH</h1>
+        <p class="quiz-start-subtitle">Svaki tačan odgovor donosi vam bodove, ali budite brzi – imate samo 10 sekundi po
+            pitanju! <br>Pažljivo birajte odgovore i pokušajte osvojiti što više bodova prije nego istekne vrijeme.
+            <br>Jeste li
+            spremni pokazati svoje znanje? Sretno! 🎉</p>
+        <img src="./sources/images/emoji.png" alt="emoji" class="quiz-start-emoji">
+        <a class="quiz-start-link" href="quiz.html">
+            <button class="quiz-start-btn">Započni kviz</button>
+        </a>
+    </div>
+
+    <div class="uputstva" id="uputstva">
         <div class="title">
             <div class="title-div">
                 <img src="./sources/icons/wand.svg" alt="wand" class="title-icon">
                 <div class="title-text">Kako funkcioniše kviz?</div>
             </div>
-            <button class="title-btn">Započni kviz</button>
+            <button class="title-btn" onclick="startQuiz()">Započni kviz</button>
         </div>
         <p class="subtitle">U našem kvizu, jednostavno je izazvati sebe i druge! Odaberite kviz, odgovorite na pitanja u
             zadanom vremenu i osvojite što više tačnih odgovora. Na kraju, možete provjeriti svoj rezultat i uporediti
@@ -52,10 +65,35 @@
 
         <div class="uputstva-container">
             <div class="uputstvo uputstvo1">
-                
+                <div class="uputstvo-bg"></div>
+
+                <div class="uputstvo-title-div">
+                    <h1 class="uputstvo-title">Prijavi se</h1>
+                    <p class="uputstvo-subtitle">Registruj se na Quiz BiH !</p>
+                </div>
+
+                <img src="./sources/icons/arrow.svg" alt="arrow" class="uputstvo-icon">
             </div>
-            <div class="uputstvo uputstvo2"></div>
-            <div class="uputstvo uputstvo3"></div>
+            <div class="uputstvo uputstvo2">
+                <div class="uputstvo-bg"></div>
+
+                <div class="uputstvo-title-div">
+                    <h1 class="uputstvo-title">Uradi kviz</h1>
+                    <p class="uputstvo-subtitle">Odgovori na sva pitanja koja imamo !</p>
+                </div>
+
+                <img src="./sources/icons/arrow.svg" alt="arrow" class="uputstvo-icon">
+            </div>
+            <div class="uputstvo uputstvo3">
+                <div class="uputstvo-bg"></div>
+
+                <div class="uputstvo-title-div">
+                    <h1 class="uputstvo-title">Budi #1</h1>
+                    <p class="uputstvo-subtitle">Osvoji ljestvicu i budi prvi !</p>
+                </div>
+
+                <img src="./sources/icons/arrow.svg" alt="arrow" class="uputstvo-icon">
+            </div>
         </div>
     </div>
 

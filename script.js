@@ -25,3 +25,7 @@ if (token) {
 
     authButtons.innerHTML = buttonsHTML;
 }
+
+function startQuiz() {
+  document.getElementById('quizStart').classList.add("quiz-start-active");
+}
