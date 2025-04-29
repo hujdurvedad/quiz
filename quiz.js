@@ -15,7 +15,7 @@ async function startGame() {
         currentQuestion = data.question;
         showQuestion();
     } catch (error) {
-        console.error('Greška prilikom startovanja igre:', error);
+        console.error('Greška prilikom startovanja igre', error);
     }
 }
 
@@ -41,10 +41,14 @@ function showQuestion() {
         answersContainer.appendChild(answerDiv);
 
         answerDiv.addEventListener('click', function () {
+            document.getElementById('answer-text').style.pointerEvents = 'none';
             answerQuestion(option.text);
         });
     });
+
+    document.getElementById('answer-text').style.pointerEvents = 'auto';
 }
+
 
 async function answerQuestion(answerText) {
     try {
@@ -66,17 +70,45 @@ async function answerQuestion(answerText) {
         const data = await response.json();
         console.log('Server odgovor:', data);
 
+        const answerDivs = document.querySelectorAll('.answer');
+        const answersContainer = document.getElementById('answer-text');
+        answersContainer.style.pointerEvents = 'none';
+
+        answerDivs.forEach((div) => {
+            const optionText = div.querySelector('.answer-text').textContent.trim().toLowerCase();
+            const clickedAnswer = answerText.trim().toLowerCase();
+            const correctAnswer = data.correctAnswer?.trim().toLowerCase();
+            const answerNum = div.querySelector('.answer-num');
+
+            if (optionText === clickedAnswer) {
+                if (data.correct) {
+                    div.classList.add('correct');
+                    answerNum.classList.add('selected-correct');
+                } else {
+                    div.classList.add('incorrect');
+                    answerNum.classList.add('selected-incorrect');
+                }
+            }
+
+            if (!data.correct && correctAnswer && optionText === correctAnswer) {
+                div.classList.add('correct');
+            }
+        });
+
         if (data.correct && data.nextQuestion) {
-            currentQuestion = data.nextQuestion;
-            showQuestion();
+            setTimeout(() => {
+                currentQuestion = data.nextQuestion;
+                showQuestion();
+            }, 3000);
         } else {
-            showGameOver();
+            setTimeout(() => {
+                showGameOver();
+            }, 3000);
         }
     } catch (error) {
         console.error('Greška prilikom slanja odgovora:', error);
     }
 }
-
 
 function showGameOver() {
     let questionTitle = document.getElementById('question');
