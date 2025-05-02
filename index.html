@@ -11,20 +11,23 @@
 
 <body>
     <header class="header">
-        <a href="./index.html">
+        <a href="./index.html" class="logo-div">
             <img src="./sources/icons/logo.png" alt="logo" class="logo">
         </a>
 
         <nav>
             <a href="#main" class="nav-link">Početna</a>
             <a href="#uputstva" class="nav-link">Uputstva</a>
-            <a href="" class="nav-link">Ljestvica</a>
+            <a href="#leaderboard" class="nav-link">Ljestvica</a>
         </nav>
 
         <div class="buttons" id="authButtons"></div>
     </header>
 
     <div class="main" id="main">
+        <div class="shadow-div shadow-div1"></div>
+        <div class="shadow-div shadow-div2"></div>
+
         <div class="main-text">
             <h1 class="main-title">Pokažite svoje <br>znanje o <span class="main-title-span">Bosni i Hercegovini</span>
             </h1>
@@ -32,7 +35,7 @@
                 domovine!</p>
             <div class="main-btn-div">
                 <button class="main-btn" onclick="startQuiz()">Započni kviz</button>
-                <p class="main-mini-text">200+ odigranih kvizova</p>
+                <p class="main-mini-text"><span id="numPlayed"></span> odigranih kvizova</p>
             </div>
         </div>
         <img src="./sources/images/home-bg.png" alt="background" class="main-img-bc">
@@ -97,7 +100,12 @@
         </div>
     </div>
 
+    <div class="leaderboard" id="leaderboard">
+        <img src="./sources/images/blue-bg.png" alt="background" class="leaderboard-bg">
+    </div>
+
     <script src="script.js"></script>
+    <script src="quiz.js"></script>
 </body>
 
 </html>

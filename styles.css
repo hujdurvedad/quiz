@@ -8,7 +8,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 3.6rem 7.2rem;
+    padding: 3.6rem 7.2rem 5.2rem 7.2rem;
 }
 
 * {
@@ -39,11 +39,15 @@ input:focus {
     align-items: center;
 }
 
+.logo-div {
+    width: 230px;
+}
+
 nav {
     display: flex;
     gap: 1.5rem;
     font-size: 1.1rem;
-    margin-left: 6.4rem;
+    justify-content: center;
 }
 
 .nav-link {
@@ -57,7 +61,9 @@ nav {
 }
 
 .buttons {
+    width: 230px;
     display: flex;
+    justify-content: end;
     gap: 1rem;
 }
 
@@ -96,7 +102,27 @@ nav {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 13rem;
+    margin-bottom: 11rem;
+}
+
+.shadow-div {
+    width: 25%;
+    height: 25rem;
+    position: absolute;
+}
+
+.shadow-div1 {
+    right: 27rem;
+    bottom: -10rem;
+    background: #D2D2254D;
+    background: radial-gradient(circle, rgba(210, 210, 37, 0.35) 0%, rgba(83, 237, 139, 0) 80%);
+}
+
+.shadow-div2 {
+    right: -5rem;
+    bottom: -3rem;
+    background: #2559D24D;
+    background: radial-gradient(circle, rgba(37, 89, 210, 0.35) 0%, rgba(83, 237, 139, 0) 80%);
 }
 
 .main-text {
@@ -158,6 +184,8 @@ nav {
 
 .uputstva {
     width: 100%;
+    padding-top: 2rem;
+    margin-bottom: 12rem;
 }
 
 .title {
@@ -323,4 +351,14 @@ nav {
 
 .quiz-start-link {
     width: 25%;
+}
+
+.leaderboard {
+    width: 100%;
+    padding-top: 1rem;
+    position: relative;
+}
+
+.leaderboard-bg {
+    width: 100%;
 }

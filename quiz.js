@@ -1,5 +1,13 @@
 let gameId = null;
 let currentQuestion = null;
+let counter = 0;
+let previousCorrect = false;
+let streak = 0;
+let progressCounter = 0;
+let score = 0;
+let timerInterval = null;
+let timeLeft = 30;
+let bestScore = 0;
 
 async function startGame() {
     try {
@@ -19,15 +27,82 @@ async function startGame() {
     }
 }
 
+function updateQuestionCounter() {
+    if (counter === 20) {
+        showGameOver();
+    }
+    counter++;
+    const questionsNum = document.getElementById('questionsNum');
+    questionsNum.innerHTML = counter;
+}
+
+function updateProgressBar() {
+    progressCounter += 5;
+    const progressBar = document.getElementById('progress-bar');
+    progressBar.style.width = `${progressCounter}%`;
+}
+
+function updateScore() {
+    const scoreElement = document.getElementById('score');
+    scoreElement.innerHTML = score;
+}
+
+function updateBestScore() {
+    const bestScoreElement = document.getElementById('best-score');
+    bestScoreElement.textContent = bestScore;
+}
+
+function updateStreak() {
+    const streakElement = document.getElementById('streak');
+    streakElement.innerHTML = streak;
+}
+
+function startTimer() {
+    clearInterval(timerInterval);
+    timeLeft = currentQuestion.timeLimit;
+    const timerElement = document.getElementById('timer');
+    timerElement.innerHTML = `${timeLeft}s`;
+
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        if (timerElement) timerElement.textContent = `${timeLeft}s`;
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            document.getElementById('answer-text').style.pointerEvents = 'none';
+            answerQuestion("");
+        }
+    }, 1000);
+}
+
+function updateNumPlayed() {
+    const numPlayed = localStorage.getItem('numPlayed');
+    const playedCount = numPlayed ? parseInt(numPlayed) + 1 : 1;
+    localStorage.setItem('numPlayed', playedCount);
+    const numPlayedElement = document.getElementById('numPlayed');
+    numPlayedElement.innerHTML = playedCount;
+}
+
+function gameLogic() {
+    updateQuestionCounter();
+    updateProgressBar();
+    updateScore();
+    updateBestScore();
+    updateStreak();
+    startTimer();
+}
+
 function showQuestion() {
     let questionTitle = document.getElementById('question');
     let answersContainer = document.getElementById('answer-text');
+    if (!questionTitle || !answersContainer) return;
+
     questionTitle.textContent = currentQuestion.title;
     answersContainer.innerHTML = '';
 
     currentQuestion.options.forEach(function (option, index) {
         let answerDiv = document.createElement('div');
         answerDiv.className = 'answer';
+
         let answerNum = document.createElement('div');
         answerNum.className = 'answer-num';
         answerNum.textContent = String.fromCharCode(65 + index);
@@ -46,14 +121,13 @@ function showQuestion() {
         });
     });
 
-    document.getElementById('answer-text').style.pointerEvents = 'auto';
+    answersContainer.style.pointerEvents = 'auto';
+    gameLogic();
 }
-
 
 async function answerQuestion(answerText) {
     try {
-        console.log('Šaljem odgovor za pitanje:', currentQuestion);
-
+        clearInterval(timerInterval);
         let response = await fetch('https://quiz-be-zeta.vercel.app/game/answer', {
             method: 'POST',
             headers: {
@@ -68,7 +142,25 @@ async function answerQuestion(answerText) {
         });
 
         const data = await response.json();
-        console.log('Server odgovor:', data);
+
+        if (data.correct) {
+            if (previousCorrect) {
+                streak++;
+            } else {
+                streak = 0;
+                previousCorrect = true;
+            }
+        } else {
+            streak = 0;
+            previousCorrect = false;
+        }
+
+        if (data.correct && data.score && !isNaN(data.score)) {
+            score += data.score;
+        }
+
+        updateScore();
+        updateStreak();
 
         const answerDivs = document.querySelectorAll('.answer');
         const answersContainer = document.getElementById('answer-text');
@@ -101,10 +193,16 @@ async function answerQuestion(answerText) {
                 showQuestion();
             }, 3000);
         } else {
+            if (data.correct) {
+                updateProgressBar();
+            }
+
             setTimeout(() => {
                 showGameOver();
             }, 3000);
         }
+
+
     } catch (error) {
         console.error('Greška prilikom slanja odgovora:', error);
     }
@@ -113,10 +211,34 @@ async function answerQuestion(answerText) {
 function showGameOver() {
     let questionTitle = document.getElementById('question');
     let answersContainer = document.getElementById('answer-text');
-    questionTitle.textContent = 'Kviz završen!';
+    questionTitle.textContent = `Kviz završen! Osvojili ste ${score} bodova.`;
     answersContainer.innerHTML = '';
+    clearInterval(timerInterval);
+
+    if (score > bestScore) {
+        localStorage.setItem('best-score', score);
+        bestScore = score;
+        updateBestScore();
+    }
+
+    updateNumPlayed();
 }
 
-window.addEventListener('load', function () {
-    startGame();
+window.addEventListener('DOMContentLoaded', function () {
+    if (document.getElementById('question') && document.getElementById('answer-text')) {
+        bestScore = parseInt(localStorage.getItem('best-score')) || 0;
+        updateBestScore();
+        startGame();
+    }
+
+    const numPlayedElement = document.getElementById('numPlayed');
+    if (numPlayedElement) {
+        const numPlayed = localStorage.getItem('numPlayed') || '0';
+        numPlayedElement.innerHTML = numPlayed;
+    }
 });
+
+const finishBtn = document.getElementById("finish-btn");
+finishBtn.addEventListener("click", () => {
+    showGameOver();
+})
