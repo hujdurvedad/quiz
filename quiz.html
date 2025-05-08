@@ -10,46 +10,78 @@
 </head>
 
 <body>
-    <a href="./index.html">
-        <img src="./sources/icons/logo.png" alt="logo" class="logo">
-    </a>
+    <div class="page" id="page">
+        <a href="./index.html">
+            <img src="./sources/icons/logo.png" alt="logo">
+        </a>
 
-    <div class="nav">
-        <div class="nav-div nav-div1">
-            <img src="./sources/icons/trophy.svg" alt="icon" class="nav-div-icon">
-            Bodovi: <span id="score">0</span>
-        </div>
-        <div class="nav-div nav-div2">
-            <img src="./sources/icons/medal.svg" alt="icon" class="nav-div-icon">
-            Najbolji rezultat: <span id="best-score"></span>
-        </div>
-        <div class="nav-div nav-div3">
-            <img src="./sources/icons/star.svg" alt="icon" class="nav-div-icon">
-            Streak: <span id="streak">0</span>
-        </div>
-        <div class="nav-div nav-div4">
-            <img src="./sources/icons/clock.svg" alt="icon" class="nav-div-icon">
-            <span id="timer">0s</span>
-        </div>
-    </div>
-
-    <div class="questions">
-        <div class="questions-header">
-            <div class="questions-header-div"></div>
-            <p class="questions-header-text" id="question-counter">Pitanje <span id="questionsNum">0</span> od 20</p>
-            <button class="questions-header-btn" id="finish-btn">Završi kviz</button>
+        <div class="nav">
+            <div class="nav-div nav-div1">
+                <img src="./sources/icons/trophy.svg" alt="icon" class="nav-div-icon">
+                Bodovi: <span id="score">0</span>
+            </div>
+            <div class="nav-div nav-div2">
+                <img src="./sources/icons/medal.svg" alt="icon" class="nav-div-icon">
+                Najbolji rezultat: <span id="best-score"></span>
+            </div>
+            <div class="nav-div nav-div3">
+                <img src="./sources/icons/star.svg" alt="icon" class="nav-div-icon">
+                Streak: <span id="streak">0</span>
+            </div>
+            <div class="nav-div nav-div4">
+                <img src="./sources/icons/clock.svg" alt="icon" class="nav-div-icon">
+                <span id="timer">0s</span>
+            </div>
         </div>
 
-        <div class="questions-container">
-            <p class="question" id="question"></p>
-
-            <div class="timeline">
-                <div class="line" id="progress-bar"></div>
+        <div class="questions">
+            <div class="questions-header">
+                <div class="questions-header-div"></div>
+                <p class="questions-header-text" id="question-counter">Pitanje <span id="questionsNum">0</span>
+                </p>
+                <button class="questions-header-btn" id="finish-btn">Završi kviz</button>
             </div>
 
-            <div class="answers" id="answer-text"></div>
+            <div class="questions-container">
+                <p class="question" id="question"></p>
+
+                <div class="timeline" id="timeline">
+                    <div class="line" id="line"></div>
+                </div>
+
+                <div class="answers" id="answer-text"></div>
+            </div>
         </div>
     </div>
+    
+    <div class="end-game-popup-container" id="end-game-popup-container">
+        <div class="end-game-popup" id="end-game-popup">
+            <img src="./sources/icons/logo.png" alt="logo" class="logo">
+            <h1 class="end-game-popup-title" id="end-game-popup-title"></h1>
+            <p class="end-game-popup-subtitle">U prilogu pogledajte svoju statistiku :</p>
+    
+            <div class="result">
+                Osvojili ste: <span class="result-statistic" id="result-statistic1"></span>
+                <img src="./sources/icons/trophy.svg" alt="icon" class="result-icon">
+            </div>
+    
+            <div class="result">
+                Leaderboard: <span class="result-statistic" id="result-statistic2">#3 mjesto</span>
+                <img src="./sources/icons/medal.svg" alt="icon" class="result-icon">
+            </div>
+    
+            <div class="buttons">
+                <a href="./index.html#leaderboard">
+                    <div class="result-btn1">Leaderboard</div>
+                </a>
+    
+                <a href="./quiz.html">
+                    <div class="result-btn2">Pokušaj ponovo</div>
+                </a>
+            </div>
+        </div>
+    </div>
+    
 
     <script src="quiz.js"></script>
 </body>

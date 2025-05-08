@@ -3,11 +3,13 @@ let currentQuestion = null;
 let counter = 0;
 let previousCorrect = false;
 let streak = 0;
-let progressCounter = 0;
 let score = 0;
 let timerInterval = null;
 let timeLeft = 30;
-let bestScore = 0;
+let redTimeout = null;
+let timelineRunning = false;
+
+const message = document.getElementById('end-game-popup-title');
 
 async function startGame() {
     try {
@@ -28,19 +30,44 @@ async function startGame() {
 }
 
 function updateQuestionCounter() {
-    if (counter === 20) {
-        showGameOver();
-    }
     counter++;
     const questionsNum = document.getElementById('questionsNum');
     questionsNum.innerHTML = counter;
 }
 
-function updateProgressBar() {
-    progressCounter += 5;
-    const progressBar = document.getElementById('progress-bar');
-    progressBar.style.width = `${progressCounter}%`;
+function updateTimeline() {
+    let timeline = document.getElementById('line');
+
+    if (redTimeout !== null) {
+        clearTimeout(redTimeout);
+        redTimeout = null;
+    }
+
+    timelineRunning = true;
+    timeline.style.transition = 'none';
+    timeline.style.width = '100%';
+    timeline.style.backgroundColor = '#2559D2';
+    timeline.offsetHeight;
+
+    setTimeout(function () {
+        if (timelineRunning) {
+            timeline.style.transition = 'width ' + (currentQuestion.timeLimit - 0.5) + 's linear';
+            timeline.style.width = '0%';
+        }
+    }, 500);
+
+    if (currentQuestion.timeLimit > 5) {
+        redTimeout = setTimeout(function () {
+            if (timelineRunning) {
+                timeline.style.transition += ', background-color 0.1s linear';
+                timeline.style.backgroundColor = 'red';
+            }
+        }, (currentQuestion.timeLimit - 5) * 1000);
+    } else {
+        timeline.style.backgroundColor = 'red';
+    }
 }
+
 
 function updateScore() {
     const scoreElement = document.getElementById('score');
@@ -65,9 +92,11 @@ function startTimer() {
 
     timerInterval = setInterval(() => {
         timeLeft--;
+
         if (timerElement) timerElement.textContent = `${timeLeft}s`;
-        if (timeLeft <= 0) {
+        if (timeLeft <= 0.9) {
             clearInterval(timerInterval);
+            message.innerHTML = 'Vrijeme je isteklo, kviz je završen !';
             document.getElementById('answer-text').style.pointerEvents = 'none';
             answerQuestion("");
         }
@@ -84,7 +113,7 @@ function updateNumPlayed() {
 
 function gameLogic() {
     updateQuestionCounter();
-    updateProgressBar();
+    updateTimeline();
     updateScore();
     updateBestScore();
     updateStreak();
@@ -126,6 +155,20 @@ function showQuestion() {
 }
 
 async function answerQuestion(answerText) {
+    timelineRunning = false;
+
+    if (redTimeout !== null) {
+        clearTimeout(redTimeout);
+        redTimeout = null;
+    }
+
+    const timeline = document.getElementById('line');
+    const computedStyle = window.getComputedStyle(timeline);
+    const currentWidth = computedStyle.getPropertyValue('width');
+
+    timeline.style.transition = 'none';
+    timeline.style.width = currentWidth;
+
     try {
         clearInterval(timerInterval);
         let response = await fetch('https://quiz-be-zeta.vercel.app/game/answer', {
@@ -179,6 +222,7 @@ async function answerQuestion(answerText) {
                 } else {
                     div.classList.add('incorrect');
                     answerNum.classList.add('selected-incorrect');
+                    message.innerHTML = 'Netačan odgovor, kviz je završen !';
                 }
             }
 
@@ -191,7 +235,7 @@ async function answerQuestion(answerText) {
             setTimeout(() => {
                 currentQuestion = data.nextQuestion;
                 showQuestion();
-            }, 3000);
+            }, 1500);
         } else {
             if (data.correct) {
                 updateProgressBar();
@@ -199,7 +243,7 @@ async function answerQuestion(answerText) {
 
             setTimeout(() => {
                 showGameOver();
-            }, 3000);
+            }, 500);
         }
 
 
@@ -209,10 +253,6 @@ async function answerQuestion(answerText) {
 }
 
 function showGameOver() {
-    let questionTitle = document.getElementById('question');
-    let answersContainer = document.getElementById('answer-text');
-    questionTitle.textContent = `Kviz završen! Osvojili ste ${score} bodova.`;
-    answersContainer.innerHTML = '';
     clearInterval(timerInterval);
 
     if (score > bestScore) {
@@ -220,6 +260,18 @@ function showGameOver() {
         bestScore = score;
         updateBestScore();
     }
+
+    const popup = document.getElementById('end-game-popup');
+    const popupContainer = document.getElementById('end-game-popup-container');
+
+    popup.classList.add("end-game-popup-active");
+    popupContainer.classList.add("end-game-popup-container-active");
+
+    page.style.pointerEvents = 'none';
+
+    const resultPoints = document.getElementById('result-statistic1');
+
+    resultPoints.innerHTML = `${score} bodova.`;
 
     updateNumPlayed();
 }
@@ -240,5 +292,23 @@ window.addEventListener('DOMContentLoaded', function () {
 
 const finishBtn = document.getElementById("finish-btn");
 finishBtn.addEventListener("click", () => {
+    message.innerHTML = 'Završili ste kviz !';
     showGameOver();
-})
+
+    finishBtn.addEventListener("click", () => {
+        message.innerHTML = 'Završili ste kviz !';
+        showGameOver();
+
+        timelineRunning = false;
+
+        const timeline = document.getElementById('line');
+        const currentWidth = window.getComputedStyle(timeline).width;
+        timeline.style.transition = 'none';
+        timeline.style.width = currentWidth;
+
+        if (redTimeout !== null) {
+            clearTimeout(redTimeout);
+            redTimeout = null;
+        }
+    });
+});

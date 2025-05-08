@@ -47,7 +47,8 @@
         <p class="quiz-start-subtitle">Svaki tačan odgovor donosi vam bodove, ali budite brzi – imate samo 10 sekundi po
             pitanju! <br>Pažljivo birajte odgovore i pokušajte osvojiti što više bodova prije nego istekne vrijeme.
             <br>Jeste li
-            spremni pokazati svoje znanje? Sretno! 🎉</p>
+            spremni pokazati svoje znanje? Sretno! 🎉
+        </p>
         <img src="./sources/images/emoji.png" alt="emoji" class="quiz-start-emoji">
         <a class="quiz-start-link" href="quiz.html">
             <button class="quiz-start-btn">Započni kviz</button>
@@ -102,6 +103,61 @@
 
     <div class="leaderboard" id="leaderboard">
         <img src="./sources/images/blue-bg.png" alt="background" class="leaderboard-bg">
+
+        <h1 class="leaderboard-title">Takmičite se i osvojite vrh !</h1>
+        <p class="leaderboard-subtitle">Izazovite svoje prijatelje i igrače širom svijeta. Pokažite da ste najbolji i
+            zauzmite svoje mjesto na leaderboardu!</p>
+        <button class="leaderboard-btn" onclick="startQuiz()">Započni kviz</button>
+
+        <div class="leaderboard-container">
+            <div class="player top-player">
+                <div class="player-info">
+                    <p class="player-num">#1</p>
+                    <p class="name">Jasmin Fajkić</p>
+                </div>
+                <p class="points">150 bodova</p>
+            </div>
+
+            <div class="player">
+                <div class="player-info">
+                    <p class="player-num">#2</p>
+                    <p class="name">Marko Petrović</p>
+                </div>
+                <p class="points">140 bodova</p>
+            </div>
+
+            <div class="player">
+                <div class="player-info">
+                    <p class="player-num">#3</p>
+                    <p class="name">Jasmina Hadžić</p>
+                </div>
+                <p class="points">125 bodova</p>
+            </div>
+
+            <div class="player">
+                <div class="player-info">
+                    <p class="player-num">#4</p>
+                    <p class="name">Lejla Majić</p>
+                </div>
+                <p class="points">120 bodova</p>
+            </div>
+
+            <div class="player">
+                <div class="player-info">
+                    <p class="player-num">#5</p>
+                    <p class="name">Ivan Kovačević</p>
+                </div>
+                <p class="points">110 bodova</p>
+            </div>
+        </div>
+
+        <div class="player you">
+            <div class="player-info">
+                <p class="player-num">#Ti</p>
+                <p class="name">Vedad Hujdur</p>
+            </div>
+            <p class="points">85 bodova</p>
+        </div>
     </div>
 
     <script src="script.js"></script>

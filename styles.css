@@ -8,7 +8,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 3.6rem 7.2rem 5.2rem 7.2rem;
+    padding: 3.6rem 7.2rem;
 }
 
 * {
@@ -170,6 +170,7 @@ nav {
     padding: 0.8rem;
     border-radius: 0.5rem;
     border: #2559D2 solid 3px;
+    font-weight: bold;
 }
 
 .main-btn:hover {
@@ -185,7 +186,7 @@ nav {
 .uputstva {
     width: 100%;
     padding-top: 2rem;
-    margin-bottom: 12rem;
+    margin-bottom: 11rem;
 }
 
 .title {
@@ -299,6 +300,7 @@ nav {
     transform: translateY(-20px);
     pointer-events: none;
     transition: opacity 0.4s ease, transform 0.4s ease;
+    z-index: 9;
 }
 
 .quiz-start-active {
@@ -355,10 +357,90 @@ nav {
 
 .leaderboard {
     width: 100%;
-    padding-top: 1rem;
+    height: 61rem;
+    padding-top: 2rem;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .leaderboard-bg {
+    position: absolute;
     width: 100%;
+}
+
+.leaderboard-title {
+    z-index: 1;
+    color: white;
+    font-size: 2.5rem;
+}
+
+.leaderboard-subtitle {
+    width: 50%;
+    z-index: 1;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.leaderboard-btn {
+    background-color: white;
+    color: #2559D2;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 0.6rem 5.2rem;
+    border-radius: 0.5rem;
+    border: white solid 3px;
+    z-index: 1;
+    margin-top: 1rem;
+}
+
+.leaderboard-btn:hover {
+    color: white;
+    background-color: #2559D2;
+}
+
+.leaderboard-container {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 45%;
+    z-index: 1;
+    margin-top: 4rem;
+}
+
+.player {
+    width: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0.3rem;
+    padding: 1rem 1.2rem;
+}
+
+.top-player {
+    box-shadow: white 0 0 10px 1px;
+}
+
+.you {
+    z-index: 1;
+    width: 45%;
+    margin-top: 4.5rem;
+    box-shadow: white 0 0 10px 1px;
+}
+
+.player-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.player-num {
+    font-weight: bold;
+    font-size: 1.1rem;
 }
