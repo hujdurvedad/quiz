@@ -68,7 +68,6 @@ function updateTimeline() {
     }
 }
 
-
 function updateScore() {
     const scoreElement = document.getElementById('score');
     scoreElement.innerHTML = score;
@@ -163,11 +162,14 @@ async function answerQuestion(answerText) {
     }
 
     const timeline = document.getElementById('line');
-    const computedStyle = window.getComputedStyle(timeline);
-    const currentWidth = computedStyle.getPropertyValue('width');
 
-    timeline.style.transition = 'none';
-    timeline.style.width = currentWidth;
+    setTimeout(() => {
+        const computedStyle = window.getComputedStyle(timeline);
+        const currentWidth = computedStyle.getPropertyValue('width');
+
+        timeline.style.transition = 'none';
+        timeline.style.width = currentWidth;
+    }, 100);
 
     try {
         clearInterval(timerInterval);
@@ -261,6 +263,18 @@ function showGameOver() {
         updateBestScore();
     }
 
+    let leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
+    const playerResult = { score: score, timestamp: Date.now() };
+    leaderboard.push(playerResult);
+    leaderboard.sort((a, b) => {
+        if (b.score === a.score) {
+            return a.timestamp - b.timestamp;
+        }
+        return b.score - a.score;
+    });
+    localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
+    const place = leaderboard.findIndex(entry => entry.timestamp === playerResult.timestamp) + 1;
+
     const popup = document.getElementById('end-game-popup');
     const popupContainer = document.getElementById('end-game-popup-container');
 
@@ -268,10 +282,13 @@ function showGameOver() {
     popupContainer.classList.add("end-game-popup-container-active");
 
     page.style.pointerEvents = 'none';
+    page.style.filter = 'blur(0.4rem)';
 
     const resultPoints = document.getElementById('result-statistic1');
+    resultPoints.innerHTML = `${score} bodova`;
 
-    resultPoints.innerHTML = `${score} bodova.`;
+    const leaderboardPlace = document.getElementById('result-statistic2');
+    leaderboardPlace.innerHTML = `#${place} mjesto.`;
 
     updateNumPlayed();
 }
@@ -291,24 +308,26 @@ window.addEventListener('DOMContentLoaded', function () {
 });
 
 const finishBtn = document.getElementById("finish-btn");
-finishBtn.addEventListener("click", () => {
-    message.innerHTML = 'Završili ste kviz !';
-    showGameOver();
 
+if (finishBtn) {
     finishBtn.addEventListener("click", () => {
-        message.innerHTML = 'Završili ste kviz !';
-        showGameOver();
-
+        clearInterval(timerInterval);
         timelineRunning = false;
 
         const timeline = document.getElementById('line');
-        const currentWidth = window.getComputedStyle(timeline).width;
-        timeline.style.transition = 'none';
-        timeline.style.width = currentWidth;
+        setTimeout(() => {
+            const currentWidth = window.getComputedStyle(timeline).width;
+            timeline.style.transition = 'none';
+            timeline.style.width = currentWidth;
+        }, 100);
 
         if (redTimeout !== null) {
             clearTimeout(redTimeout);
             redTimeout = null;
         }
+
+        message.innerHTML = 'Završili ste kviz !';
+        document.getElementById('answer-text').style.pointerEvents = 'none';
+        showGameOver();
     });
-});
+}
